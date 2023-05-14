@@ -1,3 +1,5 @@
+HOST_WORKDIR="${1:-$(pwd)/work}"
+
 set -o allexport
 source .env
 set +o allexport
@@ -8,7 +10,7 @@ docker run \
   --name jupyterlab \
   --env JUPYTER_PASSWORD_HASH="${JUPYTER_PASSWORD_HASH}" \
   -p 8888:8888 \
-  -v "${PWD}"/work:/home/jovyan/work \
-  --mount type=bind,source=${FILE_PRIVKEY},target=/opt/privkey.pem,readonly \
-  --mount type=bind,source=${FILE_FULLCHAIN},target=/opt/fullchain.pem,readonly \
+  -v "${HOST_WORKDIR}":/home/jovyan/work \
+  --mount type=bind,source="${FILE_PRIVKEY}",target=/opt/privkey.pem,readonly \
+  --mount type=bind,source="${FILE_FULLCHAIN}",target=/opt/fullchain.pem,readonly \
   jjurm/jupyterlab
