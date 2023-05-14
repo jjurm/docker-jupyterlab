@@ -13,11 +13,11 @@ EXPOSE 8888
 
 USER jovyan
 
+ENV JUPYTER_PASSWORD_HASH=""
 CMD [ \
     "/opt/conda/bin/jupyter", \
     "lab", \
     "--collaborative", \
-    "--ip", "0.0.0.0", \
     "--ServerApp.certfile=/opt/fullchain.pem", \
     "--ServerApp.keyfile=/opt/privkey.pem", \
     "--ServerApp.ip=0.0.0.0", \
